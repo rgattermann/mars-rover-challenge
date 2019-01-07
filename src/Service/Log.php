@@ -1,0 +1,79 @@
+<?php
+
+namespace MarsRover\Service;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
+class Log
+{
+    protected static $instance;
+
+    /**
+     * Get logger
+     *
+     * @return \Monolog\Logger
+     */
+    public static function getLogger() : ? Logger
+    {
+        if (!self::$instance) {
+            self::configureInstance();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Logger setup
+     *
+     * @return Logger
+     */
+    protected static function configureInstance()
+    {
+        $logger = new Logger('MarsRover');
+        $logger->pushHandler(
+            new StreamHandler('php://stdout', \Monolog\Logger::INFO)
+        );
+
+        self::$instance = $logger;
+    }
+
+    public static function debug($message, array $context = [])
+    {
+        self::getLogger()->addDebug($message, $context);
+    }
+
+    public static function info($message, array $context = [])
+    {
+        self::getLogger()->addInfo($message, $context);
+    }
+
+    public static function notice($message, array $context = [])
+    {
+        self::getLogger()->addNotice($message, $context);
+    }
+
+    public static function warning($message, array $context = [])
+    {
+        self::getLogger()->addWarning($message, $context);
+    }
+
+    public static function error($message, array $context = [])
+    {
+        self::getLogger()->addError($message, $context);
+    }
+
+    public static function critical($message, array $context = [])
+    {
+        self::getLogger()->addCritical($message, $context);
+    }
+
+    public static function alert($message, array $context = [])
+    {
+        self::getLogger()->addAlert($message, $context);
+    }
+
+    public static function emergency($message, array $context = [])
+    {
+        self::getLogger()->addEmergency($message, $context);
+    }
+}
