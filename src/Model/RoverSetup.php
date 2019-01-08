@@ -27,8 +27,10 @@ class RoverSetup
         return $this->direction;
     }
 
-    public function toString(): string
+    public function printInstructions(): string
     {
-        return $this->coordinate->getX() . '  ' . $this->coordinate->getY() . ' ' . $this->direction->getOrientation();
+        return $this->coordinate->getX() . ' '
+            . $this->coordinate->getY() . ' '
+            . $this->direction->getOrientation();
     }
 }
