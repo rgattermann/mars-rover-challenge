@@ -2,14 +2,16 @@
 
 namespace MarsRover\Test\Model;
 
-use MarsRover\Model\{Rover, RoverSetup};
+use MarsRover\Model\{Plateau, Coordinate, Rover, RoverSetup};
+use MarsRover\Exceptions\OutOfPlateauRange;
 use PHPUnit\Framework\TestCase;
 
 class RoverTest extends TestCase
 {
     public function setUp()
     {
-        $this->rover = new Rover;
+        $plateau = new Plateau(new Coordinate(5, 5));
+        $this->rover = new Rover($plateau);
     }
 
     public function testRoverCreation()
@@ -21,5 +23,13 @@ class RoverTest extends TestCase
     {
         $this->rover->setSetup(new RoverSetup('3 3 E'));
         $this->assertTrue($this->rover->getSetup() instanceof RoverSetup);
+    }
+
+    public function testRoverSetupOutPlateau()
+    {
+        $this->expectException(OutOfPlateauRange::class);
+        $plateau = new Plateau(new Coordinate(5, 5));
+        $rover = new Rover($plateau);
+        $rover->setSetup(new RoverSetup('1 6 S'));
     }
 }

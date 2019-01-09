@@ -2,7 +2,7 @@
 
 namespace MarsRover\Test\Model;
 
-use MarsRover\Model\{Rover, RoverSetup};
+use MarsRover\Model\{Plateau, Coordinate, Rover, RoverSetup};
 use MarsRover\Service\CommandFactory;
 use PHPUnit\Framework\TestCase;
 
@@ -10,7 +10,8 @@ class SpinLeftTest extends TestCase
 {
     public function testSpinCorrectly()
     {
-        $rover = new Rover;
+        $plateau = new Plateau(new Coordinate(5, 5));
+        $rover = new Rover($plateau);
         $rover->setSetup(new RoverSetup('1 1 S'));
 
         $spinLeft = (new CommandFactory)->createCommand('L');

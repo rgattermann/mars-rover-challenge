@@ -7,27 +7,15 @@ use PHPUnit\Framework\TestCase;
 
 class PlateauTest extends TestCase
 {
-    public function testMinCoordinateX()
+    public function testCoordinateX()
     {
         $plateau = new Plateau(new Coordinate(11, 2));
-        $this->assertSame(0, $plateau->getMin()->getX());
+        $this->assertSame(11, $plateau->getCoordinate()->getX());
     }
 
-    public function testMinCoordinateY()
+    public function testCoordinateY()
     {
         $plateau = new Plateau(new Coordinate(32, 14));
-        $this->assertSame(0, $plateau->getMin()->getY());
-    }
-
-    public function testMaxCoordinateX()
-    {
-        $plateau = new Plateau(new Coordinate(11, 2));
-        $this->assertSame(11, $plateau->getMax()->getX());
-    }
-
-    public function testMaxCoordinateY()
-    {
-        $plateau = new Plateau(new Coordinate(32, 14));
-        $this->assertSame(14, $plateau->getMax()->getY());
+        $this->assertSame(14, $plateau->getCoordinate()->getY());
     }
 }
