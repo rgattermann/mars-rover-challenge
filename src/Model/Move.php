@@ -4,6 +4,7 @@ namespace MarsRover\Model;
 
 use MarsRover\Model\{Direction, Rover, RoverSetup};
 use MarsRover\Interfaces\Command;
+use MarsRover\Service\Input;
 
 class Move implements Command
 {
@@ -18,21 +19,30 @@ class Move implements Command
 
         switch ($orientation) {
             case Direction::NORTH:
-                $newSetup = $coordinateX . ' ' . ($coordinateY + 1) . ' ' . $orientation;
+                $coordinateY = ($coordinateY + self::MOVEMENT_FACTOR);
+                $newSetup = $this->newSetupString($coordinateX, $coordinateY, $orientation);
                 break;
             case Direction::WEST:
-                $newSetup = ($coordinateX - self::MOVEMENT_FACTOR) . ' ' . $coordinateY . ' ' . $orientation;
+                $coordinateX = ($coordinateX - self::MOVEMENT_FACTOR);
+                $newSetup = $this->newSetupString($coordinateX, $coordinateY, $orientation);
                 break;
             case Direction::EAST:
-                $newSetup = ($coordinateX + self::MOVEMENT_FACTOR) . ' ' . $coordinateY . ' ' . $orientation;
+                $coordinateX = ($coordinateX + self::MOVEMENT_FACTOR);
+                $newSetup = $this->newSetupString($coordinateX, $coordinateY, $orientation);
                 break;
             case Direction::SOUTH:
-                $newSetup = $coordinateX . ' ' . ($coordinateY - self::MOVEMENT_FACTOR) . ' ' . $orientation;
+                $coordinateY = ($coordinateY - self::MOVEMENT_FACTOR);
+                $newSetup = $this->newSetupString($coordinateX, $coordinateY, $orientation);
                 break;
             default:
                 throw new InvalidArgumentException($orientation . ' is a invalid orientation direction');
         }
         
         $rover->setSetup(new RoverSetup($newSetup));
+    }
+
+    private function newSetupString(int $coordX, int $coordY, string $orientation): string
+    {
+        return $coordX . Input::CMD_SEPARATOR . $coordY . Input::CMD_SEPARATOR . $orientation;
     }
 }
