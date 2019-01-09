@@ -4,11 +4,19 @@ namespace MarsRover\Model;
 
 use MarsRover\Collections\CommandCollection;
 use MarsRover\Service\Log;
+use MarsRover\Model\Plateau;
+use MarsRover\Exceptions\OutOfPlateauRange;
 
 class Rover
 {
     private $setup;
     private $commands;
+    private $plateau;
+
+    public function __construct(Plateau $plateau)
+    {
+        $this->plateau = $plateau;
+    }
 
     public function setCommands(CommandCollection $c)
     {
@@ -18,6 +26,10 @@ class Rover
 
     public function setSetup(RoverSetup $rs)
     {
+        if (!$this->insaidePlateau($this->plateau, $rs)) {
+            throw new OutOfPlateauRange('Coordenate ' . $rs->printInstructions() . ' out of plateau');
+        }
+
         $this->setup = $rs;
         return $this;
     }
@@ -44,5 +56,15 @@ class Rover
     public function printSetup(): string
     {
         return $this->setup->printInstructions();
+    }
+
+    private function insaidePlateau(Plateau $plateau, RoverSetup $roverSetup) : bool
+    {
+        $coordinate = $roverSetup->getCoordinate();
+
+        return $coordinate->getX() >= 0
+            && $coordinate->getX() <= $plateau->getX()
+            && $coordinate->getY() >= 0
+            && $coordinate->getY() <= $plateau->getY();
     }
 }

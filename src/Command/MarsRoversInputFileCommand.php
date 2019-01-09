@@ -4,7 +4,7 @@ namespace MarsRover\Command;
 use SplFileObject;
 use InvalidArgumentException;
 use MarsRover\Service\Input;
-use MarsRover\Model\{Coordinate, Plateau, Rover, RoverSetup};
+use MarsRover\Model\{Plateau, Rover, RoverSetup};
 use MarsRover\Collections\RoverCollection;
 use MarsRover\Service\CommandsInputParser;
 use Symfony\Component\Console\Command\Command;
@@ -35,8 +35,7 @@ class MarsRoversInputFileCommand extends Command
                 if ($file->key() == 0) {
                     
                     list($plateau_x, $plateau_y) = explode(Input::CMD_SEPARATOR, $line);
-                    $coordinate = new Coordinate((int)$plateau_x, (int)$plateau_y);
-                    $plateau = new Plateau($coordinate);
+                    $plateau = new Plateau((int)$plateau_x, (int)$plateau_y);
 
                     $roverCollection = new RoverCollection;
                     $squadCounter = 0;
@@ -45,7 +44,7 @@ class MarsRoversInputFileCommand extends Command
 
                 if (Input::isDigit(Input::toArray($line))) {
                     if ($roverCollection->offsetExists($squadCounter) == false) {
-                        $rover = new Rover;
+                        $rover = new Rover($plateau);
                         $rover->setSetup(new RoverSetup($line));
                         $roverCollection->offsetSet($squadCounter, $rover);
                     }
