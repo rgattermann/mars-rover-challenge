@@ -1,6 +1,6 @@
 <?php
 
-namespace MarsRover\Test\Model\Rover;
+namespace MarsRover\Test\Model;
 
 use MarsRover\Model\{Rover, RoverSetup};
 use PHPUnit\Framework\TestCase;

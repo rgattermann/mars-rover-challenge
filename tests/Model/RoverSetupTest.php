@@ -1,6 +1,6 @@
 <?php
 
-namespace MarsRover\Test\Model\Rover;
+namespace MarsRover\Test\Model;
 
 use MarsRover\Model\{Coordinate, Direction, RoverSetup};
 use PHPUnit\Framework\TestCase;

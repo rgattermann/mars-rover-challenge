@@ -1,6 +1,6 @@
 <?php
 
-namespace MarsRover\Test\Model\Plateau;
+namespace MarsRover\Test\Model;
 
 use MarsRover\Model\{Coordinate, Plateau};
 use PHPUnit\Framework\TestCase;
