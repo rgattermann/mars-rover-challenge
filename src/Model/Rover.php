@@ -2,12 +2,14 @@
 
 namespace MarsRover\Model;
 
+use MarsRover\Collections\CommandCollection;
+
 class Rover
 {
     private $setup;
     private $commands;
 
-    public function setCommands(CommandsCollection $c)
+    public function setCommands(CommandCollection $c)
     {
         $this->commands = $c;
         return $this;
@@ -38,6 +40,6 @@ class Rover
 
     public function printSetup(): string
     {
-        return $this->setup->toString();
+        return $this->setup->printInstructions();
     }
 }

@@ -11,9 +11,9 @@ class RoverSetup
 
     public function __construct(string $currentSetupInput)
     {
-        list($coor1, $coor2, $direction) = explode(' ', $currentSetupInput);
+        list($coord1, $coord2, $direction) = explode(' ', $currentSetupInput);
 
-        $this->coordinate = new Coordinate($coor1, $coor2);
+        $this->coordinate = new Coordinate($coord1, $coord2);
         $this->direction = new Direction($direction);
     }
 
