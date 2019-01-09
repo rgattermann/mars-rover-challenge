@@ -63,8 +63,8 @@ class Rover
         $coordinate = $roverSetup->getCoordinate();
 
         return $coordinate->getX() >= 0
-            && $coordinate->getX() <= $plateau->getX()
+            && $coordinate->getX() <= $plateau->getCoordinate()->getX()
             && $coordinate->getY() >= 0
-            && $coordinate->getY() <= $plateau->getY();
+            && $coordinate->getY() <= $plateau->getCoordinate()->getY();
     }
 }

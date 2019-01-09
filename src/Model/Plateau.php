@@ -6,22 +6,15 @@ use MarsRover\Model\Coordinate;
 
 class Plateau
 {
-    private $x;
-    private $y;
+    private $coordinate;
 
-    public function __construct(int $x, int $y)
+    public function __construct(Coordinate $c)
     {
-        $this->x = $x;
-        $this->y = $y;
+        $this->coordinate = $c;
     }
 
-    public function getX(): int
+    public function getCoordinate(): Coordinate
     {
-        return $this->x;
-    }
-
-    public function getY(): int
-    {
-        return $this->y;
+        return $this->coordinate;
     }
 }

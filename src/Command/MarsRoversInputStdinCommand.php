@@ -2,7 +2,7 @@
 namespace MarsRover\Command;
 
 use MarsRover\Service\Input;
-use MarsRover\Model\{Plateau, Rover, RoverSetup};
+use MarsRover\Model\{Coordinate, Plateau, Rover, RoverSetup};
 use MarsRover\Collections\RoverCollection;
 use MarsRover\Service\CommandsInputParser;
 use Symfony\Component\Console\Command\Command;
@@ -24,7 +24,8 @@ class MarsRoversInputStdinCommand extends Command
         $plateau_dimensions = $helper->ask($input, $output, (new Question('Plateau dimensions: ', 3)));
 
         list($plateau_x, $plateau_y) = explode(Input::CMD_SEPARATOR, $plateau_dimensions);
-        $plateau = new Plateau((int)$plateau_x, (int)$plateau_y);
+        $coordinate = new Coordinate((int)$plateau_x, (int)$plateau_y);
+        $plateau = new Plateau($coordinate);
 
         $roverCollection = new RoverCollection;
         $squadCounter = 0;
