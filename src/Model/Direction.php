@@ -16,7 +16,7 @@ class Direction
     public function __construct(string $orientation)
     {
         if (!$this->isValid($orientation)) {
-            throw new InvalidArgumentException($orientation . 'Is a invalid orientation');
+            throw new InvalidArgumentException($orientation . ' is a invalid orientation');
         }
 
         $this->orientation = $orientation;
@@ -29,7 +29,7 @@ class Direction
 
     private function isValid(string $orientation): bool
     {
-        return in_array($orientation,[
+        return in_array($orientation, [
                 self::NORTH,
                 self::WEST,
                 self::EAST,
