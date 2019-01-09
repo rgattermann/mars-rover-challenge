@@ -3,6 +3,7 @@
 namespace MarsRover\Model;
 
 use MarsRover\Collections\CommandCollection;
+use MarsRover\Service\Log;
 
 class Rover
 {
@@ -33,7 +34,9 @@ class Rover
 
         while ($iterator->valid()) {
             $command = $iterator->current();
+            Log::debug('Excuting command: ', [get_class($command)]);
             $command->execute($this);
+            Log::debug('Current setup: ', [$this->setup->printInstructions()]);
             $iterator->next();
         }
     }

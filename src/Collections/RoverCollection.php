@@ -3,6 +3,7 @@
 namespace MarsRover\Collections;
 
 use \ArrayObject;
+use MarsRover\Service\Log;
 
 class RoverCollection extends ArrayObject
 {
@@ -12,7 +13,9 @@ class RoverCollection extends ArrayObject
         $i->rewind();
 
         while ($i->valid()) {
-            $i->current()->execute();
+            $rover = $i->current();
+            Log::debug('Excuting rover: ', [$rover->printSetup()]);
+            $rover->execute();
             $i->next();
         }
     }
@@ -24,7 +27,8 @@ class RoverCollection extends ArrayObject
 
         $setup = [];
         while ($i->valid()) {
-            array_push($setup, $i->current()->printSetup());
+            $rover = $i->current();
+            array_push($setup, $rover->printSetup());
             $i->next();
         }
 

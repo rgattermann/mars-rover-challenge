@@ -4,7 +4,7 @@ namespace MarsRover\Model;
 
 use MarsRover\Model\{Direction, Rover, RoverSetup};
 use MarsRover\Interfaces\Command;
-use MarsRover\Service\Input;
+use MarsRover\Service\{Input, Log};
 
 class Move implements Command
 {
@@ -37,7 +37,7 @@ class Move implements Command
             default:
                 throw new InvalidArgumentException($orientation . ' is a invalid orientation direction');
         }
-        
+        Log::debug('Moviment setup', [$newSetup]);
         $rover->setSetup(new RoverSetup($newSetup));
     }
 
