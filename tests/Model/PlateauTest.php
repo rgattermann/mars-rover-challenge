@@ -22,12 +22,12 @@ class PlateauTest extends TestCase
     public function testMaxCoordinateX()
     {
         $plateau = new Plateau(new Coordinate(11, 2));
-        $this->assertSame(11, $Plateau->getMaxBorders()->getX());
+        $this->assertSame(11, $plateau->getMax()->getX());
     }
 
     public function testMaxCoordinateY()
     {
         $plateau = new Plateau(new Coordinate(32, 14));
-        $this->assertSame(14, $Plateau->getMaxBorders()->getY());
+        $this->assertSame(14, $plateau->getMax()->getY());
     }
 }
