@@ -8,7 +8,7 @@ use \MarsRover\Collections\RoverCollection;
 use \MarsRover\Service\{CommandsInputParser, Input};
 
 if (STDIN) {
-    list($plateau_x, $plateau_y) = explode(' ', fgets(STDIN));
+    list($plateau_x, $plateau_y) = explode(Input::CMD_SEPARATOR, fgets(STDIN));
     $coordinate = new Coordinate((int) $plateau_x, (int) $plateau_y);
     $plateau = new Plateau($coordinate);
 
@@ -17,7 +17,7 @@ if (STDIN) {
 
     while (trim($input = fgets(STDIN)) !== '') {
         $input = str_replace(array("\n", "\r"), ' ', $input);
-        
+
         if (Input::isDigit(Input::toArray($input))) {
             if ($roverCollection->offsetExists($squadCounter) == false) {
                 $rover = new Rover;
