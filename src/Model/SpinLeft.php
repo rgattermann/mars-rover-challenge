@@ -10,7 +10,7 @@ class SpinLeft extends Spinnable implements Command
 {
     use \MarsRover\Traits\SpinExecuteTrait;
 
-    protected function spin($direction): string
+    protected function spin(string $direction): string
     {
         switch ($direction) {
             case Direction::NORTH:
